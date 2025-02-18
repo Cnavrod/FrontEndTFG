@@ -1,0 +1,145 @@
+/* Estilo para el botón principal */
+.default-btn {
+  background-color: rgb(141, 188, 232);
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.5s ease;
+  font-weight: bold;
+}
+
+.default-btn:hover {
+  background-color: rgb(185, 218, 248);
+  transform: scale(1.05);
+}
+
+/* Estilos para la sección principal (Hero Section) */
+.hero-section {
+    background-image: url('../../public/assets/images/hoke.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:rgb(141, 188, 232);
+    text-align: center;
+    padding: 0 2rem;
+    font-weight: bold;
+  }
+  
+  /* Estilos para el contenido dentro de la Hero Section */
+  .hero-content {
+    max-width: 600px;
+  }
+  
+  /* Estilos para el título */
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilos para el párrafo */
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Estilos para el botón */
+  .hero-button {
+    background-color: rgb(141, 188, 232); /* Color verde de Spotify */
+    color: black;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.5s ease;
+    font-weight: bold;
+  }
+  
+  /* Estilos para el botón al pasar el mouse */
+  .hero-button:hover {
+    background-color: rgb(185, 218, 248); /* Color verde más claro */
+    transform: scale(1.1);
+  }
+
+/* Carrusel a pantalla completa */
+.carousel-container {
+  width: 100%;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centra verticalmente el contenido */
+  background-color: #f5f5f5;
+  position: relative;
+  text-align: center;
+  margin: 0; /* Elimina margenes */
+  padding: 0; /* Elimina padding */
+}
+
+/* Opcional: si quieres ajustar la imagen */
+.carousel-image {
+  width: 100%;
+  max-width: 650px; /* Tamaño máximo para la imagen */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover; /* Ajusta cómo la imagen llena el espacio */
+}
+
+/* Botones de navegación */
+.carousel-btn {
+  background: none;
+  border: none;
+  font-size: 3rem; /* Tamaño del ícono */
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7; /* Transparencia ligera */
+}
+
+.carousel-btn:hover {
+  opacity: 1; /* Opacidad completa al pasar el mouse */
+}
+
+.prev-btn {
+  left: 2rem; /* Ajusta la separación del borde */
+}
+
+.next-btn {
+  right: 2rem; /* Ajusta la separación del borde */
+}
+
+
+/* Estilos para la sección de recomendaciones */
+.recommendations-section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.recommendations-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem; /* Tamaño de fuente aumentado */
+  color: #333;
+  font-weight: bold; /* Texto en negrita */
+}
+
+.recommendation-category {
+  margin-bottom: 3rem;
+  text-align: center; /* Centra el texto de las categorías */
+}
+
+.recommendation-category h3 {
+  margin-bottom: 1rem;
+  font-size: 2rem; /* Tamaño de fuente aumentado */
+  color: #555;
+  font-weight: bold; /* Texto en negrita */
+}
