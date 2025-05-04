@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { mockUser } from '../../services/auth_API';
 import '../../styles/layout.css';
 import CustomButton from '../Home/custombutton';
+import { registerUser } from "../../services/apiService";
 
 export default function RegisterForm() {
-  const [username, setUsername]       = useState('');
-  const [email, setEmail]             = useState('');
-  const [password, setPassword]       = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-  const [error, setError]             = useState('');
-  const [success, setSuccess]         = useState('');
+  const [role, setRole] = useState('oyente'); // Valor predeterminado
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
-  const validatePassword = (pass) =>
-    /[A-Z]/.test(pass) && /\d/.test(pass) && /\W/.test(pass) && pass.length >= 8;
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Formato de email inválido');
-      return;
-    }
-    if (!validatePassword(password)) {
-      setError('La contraseña debe tener 8 caracteres, 1 mayúscula, 1 número y 1 símbolo');
-      return;
-    }
+
     if (password !== confirmPass) {
       setError('Las contraseñas no coinciden');
       return;
     }
-    if (username === mockUser.username || email === mockUser.email) {
-      setError('Ese usuario o correo ya está registrado');
-      return;
+
+    try {
+      const data = { username, email, password, role };
+      await registerUser(data);
+      setSuccess('¡Registro exitoso!');
+      setTimeout(() => navigate('/login'), 1000);
+    } catch (error) {
+      setError('Error al registrar el usuario');
     }
-    setSuccess('¡Registro exitoso!');
-    setTimeout(() => navigate('/login'), 1000);
   };
 
   return (
@@ -49,42 +43,31 @@ export default function RegisterForm() {
       <input
         type="text"
         value={username}
-        onChange={(e) => {
-          setError('');
-          setSuccess('');
-          setUsername(e.target.value);
-        }}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <label>Correo Electrónico</label>
       <input
-        type="text"
+        type="email"
         value={email}
-        onChange={(e) => {
-          setError('');
-          setSuccess('');
-          setEmail(e.target.value);
-        }}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <label>Contraseña</label>
       <input
         type="password"
         value={password}
-        onChange={(e) => {
-          setError('');
-          setSuccess('');
-          setPassword(e.target.value);
-        }}
+        onChange={(e) => setPassword(e.target.value)}
       />
       <label>Confirmar Contraseña</label>
       <input
         type="password"
         value={confirmPass}
-        onChange={(e) => {
-          setError('');
-          setSuccess('');
-          setConfirmPass(e.target.value);
-        }}
+        onChange={(e) => setConfirmPass(e.target.value)}
       />
+      <label>Rol</label>
+      <select value={role} onChange={(e) => setRole(e.target.value)}>
+        <option value="oyente">Oyente</option>
+        <option value="cantante">Cantante</option>
+      </select>
       <CustomButton text="Registrarse" styleClass="default-btn btn-spacing" />
       <p>
         <a href="/login">¿Ya tienes una cuenta? Inicia Sesión</a>

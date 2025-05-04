@@ -1,4 +1,3 @@
-//// filepath: /d:/Cosas instituto/1 Grado Superior DAW/SegundoAño/EC/T2/Sprint2.2/Sprint2.2/src/context/AuthContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext(null);
@@ -17,9 +16,14 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setCurrentUser(JSON.parse(storedUser));
+    try {
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        setCurrentUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error('Error parsing stored user:', error);
+      setCurrentUser(null); // Establece un valor predeterminado en caso de error
     }
   }, []);
 

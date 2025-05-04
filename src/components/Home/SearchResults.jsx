@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { mockItems } from "../../services/content_API";
+import { fetchSongs } from "../../services/apiService";
 import "../../styles/layout.css";
 
 // Función para quitar acentos y convertir a minúsculas
@@ -15,13 +15,22 @@ export default function SearchResults() {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    const normalizedQuery = normalizeText(query);
-    const filtered = mockItems.filter((item) => {
-      const title = normalizeText(item.title);
-      const artist = normalizeText(item.artist);
-      return title.includes(normalizedQuery) || artist.includes(normalizedQuery);
-    });
-    setResults(filtered);
+    async function searchSongs() {
+      try {
+        const songs = await fetchSongs();
+        const filtered = songs.filter((item) => {
+          const normalizedQuery = query.toLowerCase();
+          return (
+            item.title.toLowerCase().includes(normalizedQuery) ||
+            item.artist.toLowerCase().includes(normalizedQuery)
+          );
+        });
+        setResults(filtered);
+      } catch (error) {
+        console.error("Error searching songs:", error);
+      }
+    }
+    searchSongs();
   }, [query]);
 
   const handlePlay = (item) => {
