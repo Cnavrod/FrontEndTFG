@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import HeaderSearch from "../Home/HeaderSearch";
 import { AuthContext } from "../Home/AuthContext";
 
 export default function Navbar() {
@@ -9,11 +8,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
-  };
-
-  const handleSearch = (query) => {
-    navigate(`/search?query=${encodeURIComponent(query)}`);
+    navigate('/'); // Redirige al usuario a la página principal al cerrar sesión
   };
 
   return (
@@ -66,6 +61,13 @@ export default function Navbar() {
             Rankings
           </NavLink>
         </li>
+        {currentUser && (
+          <li>
+            <NavLink to="/my-playlists" className={({ isActive }) => (isActive ? 'active' : '')}>
+              Mis Playlists
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

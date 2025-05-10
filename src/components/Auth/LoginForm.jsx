@@ -20,9 +20,8 @@ export default function LoginForm() {
 
     try {
       const data = { username: userInput, password };
-      const response = await loginUser(data);
-      localStorage.setItem('token', response.token);
-      login(response.user);
+      const response = await loginUser(data); // Llama al servicio para iniciar sesión
+      login(response.user, response.token); // Actualiza el contexto con el usuario y el token
       setSuccess('Has iniciado sesión correctamente.');
       setTimeout(() => navigate('/'), 1000);
     } catch (error) {

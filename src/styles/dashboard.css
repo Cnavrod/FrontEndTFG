@@ -157,3 +157,21 @@
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
   }
+
+  .dashboard-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard-container li {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-container li:hover {
+    background-color: #e0e0e0;
+  }

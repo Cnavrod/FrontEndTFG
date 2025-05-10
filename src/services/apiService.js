@@ -44,5 +44,47 @@ export async function loginUser(data) {
     body: JSON.stringify(data),
   });
   if (!response.ok) throw new Error('Error logging in');
+  return response.json(); // Devuelve el token y los datos del usuario
+}
+
+export async function createPlaylist(data) {
+  const response = await fetch(`${API_URL}/users/playlists`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`, // Token para autenticación
+    },
+    body: JSON.stringify(data), // Enviar los datos de la playlist al backend
+  });
+  if (!response.ok) throw new Error('Error creating playlist');
+  return response.json();
+}
+
+export async function addSongToPlaylist(playlistId, songId) {
+  const response = await fetch(`${API_URL}/users/playlists/add-song`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify({ playlistId, songId }),
+  });
+  if (!response.ok) throw new Error('Error adding song to playlist');
+  return response.json();
+}
+
+export async function getUserPlaylists() {
+  const response = await fetch(`${API_URL}/users/playlists`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+  if (!response.ok) throw new Error('Error fetching user playlists');
+  return response.json();
+}
+
+export async function getPublicPlaylists() {
+  const response = await fetch(`${API_URL}/users/playlists/public`);
+  if (!response.ok) throw new Error('Error fetching public playlists');
   return response.json();
 }

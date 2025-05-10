@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './components/Home/AuthContext';
+import React, { useState, useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './components/Home/AuthContext';
 import Navbar from './components/Layout/Navbar';
 import HeroSection from './components/Home/HeroSection';
 import SongsCarousel from './components/Home/SongsCarousel';
@@ -13,6 +13,13 @@ import Footer from './components/Layout/Footer';
 import Dashboard from './components/Home/Dashboard';
 import RecommendedSection from './components/Home/RecommendedSection';
 import Rankings from './components/Home/Rankings';
+import MyPlaylists from './components/Home/MyPlaylists';
+
+// Componente para proteger rutas privadas
+function PrivateRoute({ children }) {
+  const { currentUser } = useContext(AuthContext);
+  return currentUser ? children : <Navigate to="/login" />;
+}
 
 export default function App() {
   // 1. Definir el estado para los ítems reproducidos recientemente
@@ -32,40 +39,46 @@ export default function App() {
   return (
     <>
       <AuthProvider>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <HeroSection />
-              <SongsCarousel />
-              <ContentList />
-              <RecommendationList />
-            </>
-          }
-        />
-        {/* 3. Modificar la ruta de RecommendedSection para pasar las props necesarias */}
-        <Route
-          path="/recommended"
-          element={
-            <RecommendedSection
-              recentlyViewed={recentlyViewed}
-              onItemPlay={handleItemPlay}
-            />
-          }
-        />
-        {/* 4. Pasar la función handleItemPlay al Dashboard */}
-        <Route
-          path="/dashboard"
-          element={<Dashboard onItemPlay={handleItemPlay} />}
-        />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-        <Route path="/forgot-password" element={<ForgotPasswordForm />} />
-        <Route path="/rankings" element={<Rankings />} />
-      </Routes>
-      <Footer />
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <HeroSection />
+                <SongsCarousel />
+                <ContentList />
+                <RecommendationList />
+              </>
+            }
+          />
+          <Route
+            path="/recommended"
+            element={
+              <RecommendedSection
+                recentlyViewed={recentlyViewed}
+                onItemPlay={handleItemPlay}
+              />
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={<Dashboard onItemPlay={handleItemPlay} />}
+          />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/rankings" element={<Rankings />} />
+          <Route
+            path="/my-playlists"
+            element={
+              <PrivateRoute>
+                <MyPlaylists />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+        <Footer />
       </AuthProvider>
     </>
   );
