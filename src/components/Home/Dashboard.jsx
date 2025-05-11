@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from './AuthContext';
 import { fetchSongs, getUserPlaylists, createPlaylist, addSongToPlaylist } from '../../services/apiService';
 import '../../styles/dashboard.css';
 
 export default function Dashboard() {
+  const { token } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState('');
@@ -14,7 +16,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [songs, userPlaylists] = await Promise.all([fetchSongs(), getUserPlaylists()]);
+        const [songs, userPlaylists] = await Promise.all([fetchSongs(token), getUserPlaylists(token)]);
         setItems(songs);
         setPlaylists(userPlaylists);
       } catch (err) {
@@ -24,14 +26,14 @@ export default function Dashboard() {
       }
     }
     loadData();
-  }, []);
+  }, [token]);
 
   const handleCreatePlaylist = async (e) => {
     e.preventDefault();
     try {
-      const newPlaylist = await createPlaylist({ name: newPlaylistName, isPublic });
-      setPlaylists((prev) => [...prev, newPlaylist]); // Agregar la nueva playlist a la lista
-      setNewPlaylistName(''); // Limpiar el formulario
+      const newPlaylist = await createPlaylist({ name: newPlaylistName, isPublic }, token);
+      setPlaylists((prev) => [...prev, newPlaylist]);
+      setNewPlaylistName('');
       setIsPublic(false);
       alert('Playlist creada exitosamente');
     } catch (error) {
@@ -41,7 +43,7 @@ export default function Dashboard() {
 
   const handleAddToPlaylist = async (songId) => {
     try {
-      await addSongToPlaylist(selectedPlaylist, songId);
+      await addSongToPlaylist(selectedPlaylist, songId, token);
       alert('Canción añadida a la playlist');
     } catch (error) {
       alert('Error al añadir la canción a la playlist');
@@ -59,8 +61,6 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       <h2>Dashboard</h2>
-
-      {/* Formulario para crear una nueva playlist */}
       <form className="create-playlist-form" onSubmit={handleCreatePlaylist}>
         <h3>Crear Nueva Playlist</h3>
         <input
@@ -80,18 +80,14 @@ export default function Dashboard() {
         </label>
         <button type="submit">Crear Playlist</button>
       </form>
-
-      {/* Selección de playlist */}
       <select value={selectedPlaylist} onChange={(e) => setSelectedPlaylist(e.target.value)}>
-      <option value="">Selecciona una playlist</option>
-      {playlists.map((playlist) => (
-        <option key={playlist._id} value={playlist._id}>
-          {playlist.name} ({playlist.isPublic ? 'Pública' : 'Privada'})
-        </option>
-      ))}
+        <option value="">Selecciona una playlist</option>
+        {playlists.map((playlist) => (
+          <option key={playlist._id} value={playlist._id}>
+            {playlist.name} ({playlist.isPublic ? 'Pública' : 'Privada'})
+          </option>
+        ))}
       </select>
-
-      {/* Tabla de canciones */}
       {items.length > 0 ? (
         <table className="songs-table">
           <thead>

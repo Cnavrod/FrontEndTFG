@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext(null);
@@ -18,10 +18,6 @@ export function AuthProvider({ children }) {
     setToken(null);
     navigate('/login'); // Redirige al usuario a la página de inicio de sesión
   };
-
-  useEffect(() => {
-    // Opcional: Puedes implementar lógica para verificar el token en el backend al cargar la aplicación
-  }, []);
 
   return (
     <AuthContext.Provider value={{ currentUser, token, login, logout }}>
