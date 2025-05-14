@@ -14,6 +14,7 @@ import Dashboard from './components/Home/Dashboard';
 import RecommendedSection from './components/Home/RecommendedSection';
 import Rankings from './components/Home/Rankings';
 import MyPlaylists from './components/Home/MyPlaylists';
+import PublicPlaylists from './components/Home/PublicPlaylists';
 
 // Componente para proteger rutas privadas
 function PrivateRoute({ children }) {
@@ -69,6 +70,7 @@ export default function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/forgot-password" element={<ForgotPasswordForm />} />
           <Route path="/rankings" element={<Rankings />} />
+          <Route path="/public-playlists" element={<PublicPlaylists />} />
           <Route
             path="/my-playlists"
             element={

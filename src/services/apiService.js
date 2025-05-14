@@ -40,17 +40,15 @@ export async function fetchSongs(token) {
 }
 
 export async function getUserPlaylists(token) {
-  const response = await fetch(`${API_URL}/users/playlists`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+  const response = await fetch(`${API_URL}/playlists/mine`, {
+    headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) throw new Error('Error fetching user playlists');
   return response.json();
 }
 
 export async function createPlaylist(data, token) {
-  const response = await fetch(`${API_URL}/users/playlists`, {
+  const response = await fetch(`${API_URL}/playlists`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +61,7 @@ export async function createPlaylist(data, token) {
 }
 
 export async function addSongToPlaylist(playlistId, songId, token) {
-  const response = await fetch(`${API_URL}/users/playlists/add-song`, {
+  const response = await fetch(`${API_URL}/playlists/add-song`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -72,5 +70,20 @@ export async function addSongToPlaylist(playlistId, songId, token) {
     body: JSON.stringify({ playlistId, songId }),
   });
   if (!response.ok) throw new Error('Error adding song to playlist');
+  return response.json();
+}
+
+export async function deletePlaylist(playlistId, token) {
+  const response = await fetch(`${API_URL}/playlists/${playlistId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) throw new Error('Error deleting playlist');
+  return response.json();
+}
+
+export async function getPublicPlaylists() {
+  const response = await fetch('http://localhost:3000/api/playlists/public');
+  if (!response.ok) throw new Error('Error fetching public playlists');
   return response.json();
 }

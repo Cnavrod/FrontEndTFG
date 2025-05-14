@@ -61,6 +61,9 @@ export default function Navbar() {
             Rankings
           </NavLink>
         </li>
+        <li>
+        <NavLink to="/public-playlists">Playlists Públicas</NavLink>
+        </li>
         {currentUser && (
           <li>
             <NavLink to="/my-playlists" className={({ isActive }) => (isActive ? 'active' : '')}>
