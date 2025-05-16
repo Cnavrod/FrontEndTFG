@@ -64,6 +64,11 @@ export default function Navbar() {
         <li>
         <NavLink to="/public-playlists">Playlists Públicas</NavLink>
         </li>
+        <li>
+            <NavLink to="/newsletter" className={({ isActive }) => (isActive ? "active" : "")}>
+            Newsletter
+            </NavLink>
+        </li>
         {currentUser && (
           <li>
             <NavLink to="/my-playlists" className={({ isActive }) => (isActive ? 'active' : '')}>

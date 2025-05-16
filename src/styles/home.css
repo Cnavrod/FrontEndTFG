@@ -189,3 +189,57 @@
 .create-playlist-form button:hover {
   background-color: #0056b3;
 }
+
+/* Estilos para la sección de Newsletter */
+.newsletter-section {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #eaf6fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(141, 188, 232, 0.15);
+  text-align: center;
+}
+
+.newsletter-section h2 {
+  color: #223046;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.newsletter-form input[type="email"] {
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #b4d4ee;
+  font-size: 1rem;
+}
+
+.newsletter-form button {
+  background: rgb(141, 188, 232);
+  color: #223046;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+  background: rgb(185, 218, 248);
+}
+
+.newsletter-section .success {
+  color: #28a745;
+  margin-top: 1rem;
+}
+
+.newsletter-section .error {
+  color: #dc3545;
+  margin-top: 1rem;
+}

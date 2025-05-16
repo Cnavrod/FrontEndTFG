@@ -15,6 +15,8 @@ import RecommendedSection from './components/Home/RecommendedSection';
 import Rankings from './components/Home/Rankings';
 import MyPlaylists from './components/Home/MyPlaylists';
 import PublicPlaylists from './components/Home/PublicPlaylists';
+import NewsletterSubscribe from './components/Home/NewsletterSubscribe';
+import ResetPasswordForm from './components/Auth/ResetPasswordForm';
 
 // Componente para proteger rutas privadas
 function PrivateRoute({ children }) {
@@ -71,6 +73,7 @@ export default function App() {
           <Route path="/forgot-password" element={<ForgotPasswordForm />} />
           <Route path="/rankings" element={<Rankings />} />
           <Route path="/public-playlists" element={<PublicPlaylists />} />
+          <Route path="/newsletter" element={<NewsletterSubscribe />} />
           <Route
             path="/my-playlists"
             element={
@@ -79,6 +82,7 @@ export default function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/reset-password/:token" element={<ResetPasswordForm />} />
         </Routes>
         <Footer />
       </AuthProvider>

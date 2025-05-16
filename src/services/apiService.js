@@ -87,3 +87,23 @@ export async function getPublicPlaylists() {
   if (!response.ok) throw new Error('Error fetching public playlists');
   return response.json();
 }
+
+export async function forgotPassword(email) {
+  const response = await fetch('http://localhost:3000/api/users/forgot-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  if (!response.ok) throw new Error('No se pudo enviar el correo de recuperación');
+  return response.json();
+}
+
+export async function resetPassword(token, password) {
+  const response = await fetch(`http://localhost:3000/api/users/reset-password/${token}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password }),
+  });
+  if (!response.ok) throw new Error('No se pudo restablecer la contraseña');
+  return response.json();
+}

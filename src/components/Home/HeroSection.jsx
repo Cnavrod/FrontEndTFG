@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/home.css';
 import CustomButton from './custombutton';
 
 export default function HeroSection() {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    console.log('Explorar');
+    navigate('/dashboard');
   };
 
   return (

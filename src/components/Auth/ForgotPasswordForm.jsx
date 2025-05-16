@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { mockUser } from '../../services/auth_API';
-import '../../styles/layout.css'; // Importar estilos
+import { forgotPassword } from '../../services/apiService';
+import '../../styles/layout.css';
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [info, setInfo]   = useState('');
+  const [info, setInfo] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setInfo('');
@@ -17,13 +17,13 @@ export default function ForgotPasswordForm() {
       setError('Formato de email inválido');
       return;
     }
-    if (email !== mockUser.email) {
-      setError('Correo no registrado');
-      return;
+    try {
+      await forgotPassword(email);
+      setInfo('Se ha enviado el enlace de recuperación a tu correo');
+      setTimeout(() => navigate('/login'), 2000);
+    } catch (err) {
+      setError('Correo no registrado o error al enviar el correo');
     }
-    setInfo('Se ha enviado el enlace de recuperación a tu correo');
-    // Redirige a la pantalla principal tras un breve lapso
-    setTimeout(() => navigate('/login'), 1000);
   };
 
   return (
@@ -35,11 +35,7 @@ export default function ForgotPasswordForm() {
       <input
         type="email"
         value={email}
-        onChange={(e) => {
-          setError('');
-          setInfo('');
-          setEmail(e.target.value);
-        }}
+        onChange={e => setEmail(e.target.value)}
       />
       <button type="submit">Enviar Enlace de Recuperación</button>
       <p>
