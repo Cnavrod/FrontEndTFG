@@ -107,3 +107,21 @@ export async function resetPassword(token, password) {
   if (!response.ok) throw new Error('No se pudo restablecer la contraseña');
   return response.json();
 }
+
+export async function createSong(data, token) {
+  const response = await fetch('http://localhost:3000/api/songs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) throw new Error('Error creando la canción');
+  return response.json();
+}
+
+export async function fetchAllSingers(token) {
+  const response = await fetch('http://localhost:3000/api/users/singers/all', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!response.ok) throw new Error('Error obteniendo cantantes');
+  return response.json();
+}

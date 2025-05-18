@@ -17,6 +17,7 @@ import MyPlaylists from './components/Home/MyPlaylists';
 import PublicPlaylists from './components/Home/PublicPlaylists';
 import NewsletterSubscribe from './components/Home/NewsletterSubscribe';
 import ResetPasswordForm from './components/Auth/ResetPasswordForm';
+import CreateSong from './components/Songs/CreateSong';
 
 // Componente para proteger rutas privadas
 function PrivateRoute({ children }) {
@@ -74,6 +75,7 @@ export default function App() {
           <Route path="/rankings" element={<Rankings />} />
           <Route path="/public-playlists" element={<PublicPlaylists />} />
           <Route path="/newsletter" element={<NewsletterSubscribe />} />
+          <Route path="/crear-cancion" element={<CreateSong />} />
           <Route
             path="/my-playlists"
             element={
