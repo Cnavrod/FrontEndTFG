@@ -205,31 +205,4 @@ Navbar
 
 4. **Footer:**  
    Información adicional como enlaces útiles, redes sociales o contacto.
-
-## Pruebas Funcionales
-
-### Prueba 1: Filtrado y visualización en el Dashboard
-• Aplicar filtros de género, año y tipo de contenido.  
-• Verificar que los resultados se actualizan correctamente.
-
-![descripcion](![alt text](https://i.imgur.com/UCowXso.gif))
-
----
-
-### ✅ Prueba 2: Sistema de recomendaciones
-• Simular contenido visto recientemente.  
-• Verificar que las recomendaciones son relevantes y se actualizan correctamente.
-
-![descripcion](![alt text](https://i.imgur.com/sBUZ1pB.gif))
-
-
----
-
-### ✅ Prueba 3: Rankings de popularidad
-• Comparar la clasificación de contenido basado en distintos criterios.  
-• Validar que los elementos más vistos aparecen correctamente ordenados.
-
-![descripcion](![alt text](../Sprint2.2/public/assets/images/atp.jpeg))
-
----
----
+   ---
