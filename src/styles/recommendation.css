@@ -40,3 +40,20 @@
     border-radius: 8px;
     margin-bottom: 0.5rem;
   }
+
+@media (max-width: 600px) {
+  .recommended-section {
+    padding: 1rem 0.5rem;
+  }
+  .recommended-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .recommended-card {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  .recommended-image {
+    height: 120px;
+  }
+}

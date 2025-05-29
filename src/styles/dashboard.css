@@ -360,3 +360,31 @@
 .modal-content button:hover {
   background: rgb(185, 218, 248);
 }
+
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  .chart {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .item-card {
+    width: 100%;
+    padding: 1rem;
+  }
+  .songs-table th, .songs-table td {
+    padding: 6px;
+    font-size: 0.95rem;
+  }
+  .playlist-sidebar {
+    width: 100%;
+    padding: 1rem 0.5rem;
+  }
+  .playlist-detail {
+    padding: 1rem;
+  }
+  .spotify-playlists-container {
+    flex-direction: column;
+  }
+}
