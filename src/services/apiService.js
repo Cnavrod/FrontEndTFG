@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api'; // Cambia esto si el backend está en otro dominio
+const API_URL = 'https://backendtfg-57v6.onrender.com/api'; // Cambia esto si el backend está en otro dominio
 
 // Función para iniciar sesión
 export async function loginUser(data) {
@@ -83,13 +83,13 @@ export async function deletePlaylist(playlistId, token) {
 }
 
 export async function getPublicPlaylists() {
-  const response = await fetch('http://localhost:3000/api/playlists/public');
+  const response = await fetch(`${API_URL}/playlists/public`);
   if (!response.ok) throw new Error('Error fetching public playlists');
   return response.json();
 }
 
 export async function forgotPassword(email) {
-  const response = await fetch('http://localhost:3000/api/users/forgot-password', {
+  const response = await fetch(`${API_URL}/users/forgot-password`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email }),
@@ -99,7 +99,7 @@ export async function forgotPassword(email) {
 }
 
 export async function resetPassword(token, password) {
-  const response = await fetch(`http://localhost:3000/api/users/reset-password/${token}`, {
+  const response = await fetch(`${API_URL}/users/reset-password/${token}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ password }),
@@ -109,7 +109,7 @@ export async function resetPassword(token, password) {
 }
 
 export async function createSong(data, token) {
-  const response = await fetch('http://localhost:3000/api/songs', {
+  const response = await fetch(`${API_URL}/songs`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
     body: JSON.stringify(data),
@@ -119,7 +119,7 @@ export async function createSong(data, token) {
 }
 
 export async function fetchAllSingers(token) {
-  const response = await fetch('http://localhost:3000/api/users/singers/all', {
+  const response = await fetch(`${API_URL}/users/singers/all`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   if (!response.ok) throw new Error('Error obteniendo cantantes');
