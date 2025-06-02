@@ -11,7 +11,7 @@ export default function NewsletterSubscribe() {
     setSuccess('');
     setError('');
     try {
-      const response = await fetch(`${API_URL}/newsletter/subscribe`, {
+      const response = await fetch('https://backendtfg-57v6.onrender.com/api/newsletter/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
