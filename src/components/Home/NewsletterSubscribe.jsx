@@ -11,7 +11,7 @@ export default function NewsletterSubscribe() {
     setSuccess('');
     setError('');
     try {
-      const response = await fetch('http://localhost:3000/api/newsletter/subscribe', {
+      const response = await fetch(`${API_URL}/newsletter/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
