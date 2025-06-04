@@ -41,7 +41,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <h2>Dashboard</h2>
+      <h2>Canciones</h2>
       <input
         type="text"
         placeholder="Buscar por nombre, artista o género..."

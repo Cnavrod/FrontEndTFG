@@ -36,7 +36,7 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>
-            Dashboard
+            Canciones
           </NavLink>
         </li>
         {/* Mostrar solo para cantantes */}

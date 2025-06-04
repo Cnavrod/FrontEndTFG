@@ -13,7 +13,7 @@ export default function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <h1>Bienvenido a tu web de musica de confianza</h1>
+        <h1>Bienvenido a BBO</h1>
         <p>Disfruta de tus canciones favoritas</p>
         <CustomButton
           text="Explorar"
