@@ -1,208 +1,101 @@
-Collecting workspace information
+# Manual de Usuario – Plataforma Web de Música
 
-Modificado para incluir “RecommendedSection”, “Ranking” y “Dashboard”:
+## ¿Cómo acceder a la web?
 
-# Análisis Detallado del Proyecto
+Para comenzar a utilizar la plataforma de BBO, abre tu navegador habitual, ya sea Google Chrome, Mozilla Firefox, Microsoft Edge, Safari u otro.  
+En la barra de direcciones, escribe la URL oficial donde está alojada la aplicación.  
+Una vez que hayas entrado, el sitio cargará automáticamente y te llevará a la página de inicio, en la cual se puede ver la foto característica de nuestra plataforma.
 
-## Descripción General del Proyecto
+## ¿Cómo moverse por la página?
 
-Tu proyecto es una **aplicación web de música** desarrollada con **React**, diseñada para ofrecer una experiencia interactiva donde los usuarios pueden:
+### Página principal (Inicio)
 
-- **Explorar contenido musical** a través de carruseles y listas.  
-- **Gestionar su cuenta** mediante autenticación (inicio de sesión, registro, recuperación de contraseña).  
-- **Acceder a recomendaciones personalizadas** basadas en sus preferencias.  
+Al ingresar, lo primero que encontrarás es nuestra portada con la característica foto.  
+Debajo, podrás ver un carrusel dinámico con canciones destacadas del momento.  
+A continuación, hay un listado con diversos contenidos disponibles, como álbumes, sencillos recientes y otro apartado con los más destacados.
 
-Utiliza **datos mockeados** para simular interacciones con una API real, lo que facilita el desarrollo y las pruebas sin necesidad de un backend completamente implementado.
+### Menú de navegación
 
-### **Objetivos Principales**
+Ubicado en la parte superior de la página, el menú principal es una barra con las funciones más relevantes para facilitar la navegación.  
+Las secciones disponibles incluyen:
 
-1. **Navegación Intuitiva**  
-   Permitir a los usuarios moverse fácilmente entre secciones como inicio, inicio de sesión, registro y recuperación de contraseña.
+- **Inicio**: te devuelve a la página principal desde cualquier sección.  
+- **Iniciar sesión**: permite acceder a tu cuenta personal usando tu nombre de usuario y contraseña.  
+- **Registrarse**: opción para crear una cuenta nueva ingresando nombre de usuario, correo electrónico, contraseña (dos veces) y el rol que llevarás en la web.  
+- **Recuperar contraseña**: accesible desde “Iniciar sesión”; tras ingresar tu correo, recibirás un enlace para cambiar tu contraseña.  
+- **Canciones**: muestra todas las canciones disponibles con su autor, año, duración y género.  
+- **Mis playlists**: permite crear, eliminar y añadir canciones a tus playlists personales.  
+- **Playlists públicas**: permite ver playlists que otros usuarios han marcado como públicas.  
+- **Recomendaciones**: ofrece canciones recomendadas según coincidencias de autor y género.
 
-2. **Autenticación**  
-   Facilitar el inicio de sesión, registro y recuperación de contraseñas con validaciones en tiempo real.
+Este menú está siempre visible para facilitar la navegación entre secciones.
 
-3. **Exploración de Contenido**  
-   Ofrecer secciones destacadas como carruseles de canciones, listas de contenido y recomendaciones personalizadas.
+---
 
-4. **Experiencia de Usuario Mejorada**  
-   Implementar notificaciones y validaciones para guiar al usuario durante sus interacciones con la aplicación.
+## Crear cuenta, iniciar sesión o recuperar acceso
 
-## Estructura de Componentes
+### Iniciar sesión
 
-### 1. Navegación y Enrutado
+1. Haz clic en “Iniciar sesión” en el menú superior.  
+2. Introduce tu nombre de usuario y contraseña.  
+3. Pulsa “Iniciar Sesión”.  
+   - Si los datos son correctos, accederás a la página principal.  
+   - Si hay un error, se mostrará un mensaje informativo.
 
-- **Navbar.jsx**  
-  Barra de navegación superior con enlaces a rutas como Inicio, Login y Register.
+### Crear una cuenta nueva
 
-- **App.jsx**  
-  Componente principal que define las rutas usando **React Router**.
+1. Haz clic en “Registrarse” en el menú.  
+2. Completa los campos: nombre de usuario, correo, contraseña (dos veces) y rol dentro de la web.  
+3. Pulsa “Crear cuenta”.  
+4. Verás un mensaje de confirmación y podrás iniciar sesión.
 
-  Rutas Definidas:  
-  - `"/"` (Inicio): Muestra 
+### Recuperar contraseña
 
-HeroSection
+1. Haz clic en “¿Olvidaste tu contraseña?” desde la pantalla de inicio de sesión.  
+2. Introduce tu correo electrónico.  
+3. Recibirás un email con un enlace para establecer una nueva contraseña.
 
-, 
+---
 
-SongsCarousel
+## Explorar música y contenido
 
-, 
+### Carrusel de canciones
 
-ContentList
+En la parte superior de la página de inicio, hay un carrusel de imágenes musicales destacadas.  
+Presenta lanzamientos recientes, álbumes populares y canciones recomendadas por el equipo editorial.
 
- y `RecommendationsList`.  
-  - `"/login"`: Muestra `LoginForm`.  
-  - `"/register"`: Muestra `RegisterForm`.  
-  - `"/forgot-password"`: Muestra `ForgotPasswordForm`.
+### Recomendaciones personalizadas
 
-### 2. Datos Simulados (Mock)
+Basado en tus hábitos de escucha, recibirás sugerencias clasificadas por categorías.  
+Estas recomendaciones se actualizan regularmente para mejorar tu experiencia musical.
 
-- **content_API.js**  
-  Contiene arrays de objetos simulando datos de canciones, listas de contenido y recomendaciones.
+---
 
-  Exportaciones Principales:  
-  - `songs`: Datos para el carrusel de canciones destacadas.  
-  - 
+## Funcionalidades disponibles para usuarios registrados
 
-mockItems
+### Tus playlists
 
-: Datos para la lista de contenido.  
-  - 
+Al iniciar sesión, accedes a un panel de control donde puedes gestionar tus playlists.
 
-recommendations
+### Gestión de playlists
 
-: Datos para la lista de recomendaciones personalizadas.
+Puedes:
+- Crear nuevas playlists asignándoles un nombre.  
+- Eliminar listas completas.  
+- Explorar playlists públicas de otros usuarios para descubrir música nueva.
 
-- **auth_API.js**  
-  Define un usuario simulado (`mockUser`) para gestionar autenticación y validaciones.
+### Rankings
 
-  Exportaciones Principales:  
-  - `mockUser`: Objeto con `username`, `email` y `password` para validar inicio de sesión, registro y recuperación de contraseña.
+Consulta qué canciones han sido más reproducidas por día, semana o mes.  
+Ideal para descubrir lo más popular y artistas emergentes.
 
-### 3. Formularios de Autenticación
+---
 
-- **LoginForm.jsx**  
-  Permite a los usuarios iniciar sesión ingresando un nombre de usuario y una contraseña.  
-  Características:  
-  - Campos: Usuario, Contraseña, Recordarme.  
-  - Validaciones: Formato de email y contraseña no vacía.  
-  - Flujo: Si coinciden con `mockUser`, redirige al panel principal con notificación de éxito; si no, muestra un error.
+## Información adicional
 
-- **RegisterForm.jsx**  
-  Facilita el registro de nuevos usuarios con validaciones en tiempo real.  
-  Características:  
-  - Campos: Nombre de Usuario, Correo Electrónico, Contraseña, Confirmar Contraseña.  
-  - Validaciones:  
-    - Email válido.  
-    - Contraseña con al menos 8 caracteres, una mayúscula, un número y un símbolo.  
-    - Confirmación de contraseñas coincidentes.  
-    - Verificación de duplicidad de correo o usuario contra `mockUser`.  
-  - Flujo: Si las validaciones pasan, muestra notificación de éxito y redirige al inicio de sesión; si no, muestra errores.
+### Pie de página (Footer)
 
-- **ForgotPasswordForm.jsx**  
-  Permite a los usuarios recuperar su contraseña ingresando su correo electrónico.  
-  Características:  
-  - Campos: Correo Electrónico.  
-  - Validaciones:  
-    - Formato de email válido.  
-    - Verificación de correo registrado en `mockUser`.  
-  - Flujo: Si válido y registrado, simula envío de enlace de recuperación y redirige al inicio; si no, muestra un error.
-
-### 4. Componentes Principales de la Página de Inicio
-
-- **HeroSection.jsx**  
-  Sección inicial con un mensaje de bienvenida o información relevante sobre la aplicación.
-
-- **SongsCarousel.jsx**  
-  Carrusel interactivo que muestra canciones destacadas con navegación entre ellas.
-
-- **ContentList.jsx**  
-  Lista de contenidos musicales disponibles para explorar.
-
-- **RecommendationsList.jsx**  
-  Presenta recomendaciones personalizadas agrupadas en categorías como "Populares", "Tendencias" y "Nuevos Lanzamientos".
-
-### 5. Layout y Estilos
-
-- **layout.css**  
-  Estilos globales y de disposición de elementos como el footer y contenedores flexibles.
-
-- **home.css**  
-  Estilos específicos para la página de inicio, incluyendo el carrusel de canciones.
-
-- **auth.css**  
-  Estilos dedicados a los formularios de autenticación para una apariencia coherente y amigable.
-
-- **index.css**  
-  Estilos base para toda la aplicación, incluyendo fuentes y ajustes globales como márgenes.
-
-### 6. Nuevas Funcionalidades: RecommendedSection, Ranking y Dashboard
-
-- **RecommendedSection** (src/components/Home/RecommendedSection.jsx)  
-  Muestra recomendaciones personalizadas según el contenido que el usuario ha reproducido.  
-  • No elimina la lista principal, sino que crea un apartado adicional con “Canciones Relacionadas”.  
-  • Filtra y agrupa ítems similares por artista o género.
-
-- **Ranking** (src/components/Home/Rankings.jsx)  
-  Permite ver una clasificación de los ítems más reproducidos en distintos períodos (día, semana, mes).  
-  • Se basa en la propiedad `plays` para ordenar los items.  
-  • Usa rango de fechas para mostrar contenido reciente.
-
-- **Dashboard** (src/components/Home/Dashboard.jsx)  
-  Presenta una interfaz para filtrar el contenido por género, año y tipo.  
-  • Actualiza la lista de ítems al cambiar los criterios de filtrado.  
-  • Muestra un recuento de popularidad que se incrementa al “reproducir” un elemento.
-
-## Flujo de la Aplicación
-
-1. **Inicio:**  
-   Acceder a `"/"` renderiza la página principal con 
-
-HeroSection
-
-, 
-
-SongsCarousel
-
-, 
-
-ContentList
-
- y `RecommendationsList`.  
-   Los usuarios pueden navegar y explorar contenido musical y recomendaciones personalizadas.
-
-2. **Autenticación:**  
-
-   - **Inicio de Sesión:**  
-     Acceso desde el 
-
-Navbar
-
-.  
-     Ingresar credenciales correctas (usuario: "usuario", contraseña: "4dA1Ts_2425") redirige al panel principal con notificación de éxito.  
-     Credenciales incorrectas muestran notificación de error.
-
-   - **Registro:**  
-     Acceso desde el 
-
-Navbar
-
-.  
-     Formulario valida datos en tiempo real y verifica duplicidad.  
-     Registro exitoso muestra notificación y redirige al inicio de sesión.  
-     Errores en los datos muestran mensajes específicos.
-
-   - **Recuperación de Contraseña:**  
-     Acceso desde el formulario de inicio de sesión.  
-     Ingresar correo válido y registrado (`usuario@adaits.com`) simula envío de enlace y redirige al inicio.  
-     Correos no registrados o inválidos muestran error.
-
-3. **Exploración de Contenido:**  
-   - **Carrusel de Canciones:** Navegar entre canciones destacadas.  
-   - **Lista de Contenido:** Explorar diversas opciones musicales.  
-   - **Recomendaciones Personalizadas:** Ver recomendaciones agrupadas por categorías, además de la nueva sección de “Canciones Relacionadas” al reproducir.
-
-4. **Footer:**  
-   Información adicional como enlaces útiles, redes sociales o contacto.
-   ---
+Incluye:
+- Iconos para redes sociales (Instagram, Twitter, Facebook, etc.).  
+- Formulario de contacto o correo de soporte técnico.  
+- Enlaces a documentos legales como Términos y Condiciones de Uso y Política de Privacidad.
