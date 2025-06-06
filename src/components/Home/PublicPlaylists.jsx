@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { getPublicPlaylists } from '../../services/apiService';
+import React, { useEffect, useState, useContext } from 'react';
+import { getPublicPlaylists, getPlaylistComments, addCommentToPlaylist } from '../../services/apiService';
+import { AuthContext } from './AuthContext';
 import '../../styles/dashboard.css';
 
 export default function PublicPlaylists() {
+  const { token, currentUser } = useContext(AuthContext);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +25,30 @@ export default function PublicPlaylists() {
     }
     fetchData();
   }, []);
+
+  // Cargar comentarios al seleccionar playlist
+  useEffect(() => {
+    async function fetchComments() {
+      if (selectedPlaylist) {
+        const comms = await getPlaylistComments(selectedPlaylist._id);
+        setComments(comms);
+      }
+    }
+    fetchComments();
+  }, [selectedPlaylist]);
+
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    if (!commentText.trim()) return;
+    try {
+      await addCommentToPlaylist(selectedPlaylist._id, commentText, token);
+      const comms = await getPlaylistComments(selectedPlaylist._id);
+      setComments(comms);
+      setCommentText('');
+    } catch {
+      setError('Error al añadir el comentario');
+    }
+  };
 
   if (loading) return <p>Cargando playlists públicas...</p>;
   if (error) return <p className="error">{error}</p>;
@@ -67,6 +95,32 @@ export default function PublicPlaylists() {
                 <li>No hay canciones en esta playlist.</li>
               )}
             </ul>
+            <section className="playlist-comments">
+              <h3>Comentarios</h3>
+              <ul>
+                {comments.length > 0 ? (
+                  comments.map((c, idx) => (
+                    <li key={idx}>
+                      <strong>{c.username}:</strong> {c.text} <span style={{ color: '#aaa', fontSize: '0.8em' }}>{new Date(c.date).toLocaleString()}</span>
+                    </li>
+                  ))
+                ) : (
+                  <li>No hay comentarios.</li>
+                )}
+              </ul>
+              {token && (
+                <form onSubmit={handleAddComment} style={{ marginTop: 10 }}>
+                  <input
+                    type="text"
+                    value={commentText}
+                    onChange={e => setCommentText(e.target.value)}
+                    placeholder="Escribe un comentario..."
+                    style={{ width: '70%', marginRight: 8 }}
+                  />
+                  <button type="submit">Comentar</button>
+                </form>
+              )}
+            </section>
           </>
         ) : (
           <div className="playlist-placeholder">

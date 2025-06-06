@@ -125,3 +125,22 @@ export async function fetchAllSingers(token) {
   if (!response.ok) throw new Error('Error obteniendo cantantes');
   return response.json();
 }
+
+export async function getPlaylistComments(playlistId) {
+  const response = await fetch(`${API_URL}/playlists/${playlistId}/comments`);
+  if (!response.ok) throw new Error('Error al cargar comentarios');
+  return response.json();
+}
+
+export async function addCommentToPlaylist(playlistId, text, token) {
+  const response = await fetch(`${API_URL}/playlists/${playlistId}/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ text }),
+  });
+  if (!response.ok) throw new Error('Error al añadir comentario');
+  return response.json();
+}

@@ -43,6 +43,7 @@ export default function RegisterForm() {
       <input
         type="text"
         value={username}
+        maxLength={12}
         onChange={(e) => setUsername(e.target.value)}
       />
       <label>Correo Electrónico</label>
