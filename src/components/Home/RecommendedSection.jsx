@@ -34,34 +34,34 @@ export default function RecommendedSection() {
       setReasonMap({});
       return;
     }
-    // Obtener canciones de la playlist seleccionada
     const playlistSongs = selectedPlaylist.songs;
-    // Obtener géneros y artistas de la playlist
-    const genres = new Set(playlistSongs.map(song => song.genre));
-    const artists = new Set(playlistSongs.map(song => song.artist));
-    // Buscar recomendaciones en todas las canciones (que no estén ya en la playlist)
+    // Nuevo cálculo de recomendaciones:
     const recs = allSongs
       .filter(song => !playlistSongs.some(ps => ps._id === song._id))
       .map(song => {
-        let reason = "";
-        if (artists.has(song.artist) && genres.has(song.genre)) {
-          reason = "Mismo artista y género";
-        } else if (artists.has(song.artist)) {
-          reason = "Mismo artista";
-        } else if (genres.has(song.genre)) {
-          reason = "Mismo género";
-        }
-        return reason ? { ...song, reason } : null;
+        // Busca coincidencias exactas
+        const matchingSongs = playlistSongs.filter(ps =>
+          (ps.artist === song.artist || ps.genre === song.genre)
+        );
+        if (matchingSongs.length === 0) return null;
+        // Motivo detallado
+        const reasons = [];
+        matchingSongs.forEach(ms => {
+          if (ms.artist === song.artist && ms.genre === song.genre) {
+            reasons.push(`"${ms.title}" (mismo artista y género)`);
+          } else if (ms.artist === song.artist) {
+            reasons.push(`"${ms.title}" (mismo artista)`);
+          } else if (ms.genre === song.genre) {
+            reasons.push(`"${ms.title}" (mismo género)`);
+          }
+        });
+        return { ...song, reasons };
       })
       .filter(Boolean);
 
     setRecommendations(recs);
-    const newReasonMap = {};
-    recs.forEach(song => {
-      newReasonMap[song._id] = song.reason;
-    });
-    setReasonMap(newReasonMap);
   }, [selectedPlaylist, allSongs]);
+
 
   return (
     <div className="recommendations-layout">
@@ -86,25 +86,29 @@ export default function RecommendedSection() {
             ? `Recomendaciones basadas en "${selectedPlaylist.name}"`
             : "Selecciona una playlist para ver recomendaciones"}
         </h2>
-        <div className="recommended-grid">
+        <div className="recommended-list">
           {recommendations.length === 0 && selectedPlaylist && (
             <p>No hay recomendaciones para esta playlist.</p>
           )}
           {recommendations.map((item) => (
-            <article key={item._id} className="recommended-card">
-              <img src={item.cover} alt={item.title} className="recommended-image" />
-              <h3>{item.title}</h3>
-              <p><strong>Artista:</strong> {item.artist}</p>
-              <p><strong>Género:</strong> {item.genre}</p>
-              <p>
-                <strong>Recomendado por:</strong> {reasonMap[item._id]}
-              </p>
+            <div key={item._id} className="recommended-row">
+              <div>
+                <strong>{item.title}</strong> — {item.artist} <span style={{ color: "#7ec7f7" }}>[{item.genre}]</span>
+              </div>
+              <div className="recommendation-reason">
+                <span>Recomendado por: </span>
+                <ul>
+                  {item.reasons.map((r, idx) => (
+                    <li key={idx}>{r}</li>
+                  ))}
+                </ul>
+              </div>
               {item.listen && (
                 <button className="default-btn" onClick={() => window.open(item.listen, "_blank")}>
                   Reproducir
                 </button>
               )}
-            </article>
+            </div>
           ))}
         </div>
       </main>

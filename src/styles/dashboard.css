@@ -388,3 +388,70 @@
     flex-direction: column;
   }
 }
+
+/* Comentarios en playlists públicas */
+.playlist-comments {
+  margin-top: 2rem;
+  background: #f4f8fb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(141,188,232,0.08);
+}
+.comments-list {
+  margin-bottom: 1rem;
+}
+.comment-item {
+  background: #eaf6fb;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.7rem;
+  box-shadow: 0 1px 4px rgba(141,188,232,0.05);
+}
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: #223046;
+  margin-bottom: 0.2rem;
+}
+.comment-user {
+  font-weight: bold;
+  color: #3a4a5a;
+}
+.comment-date {
+  color: #7ec7f7;
+  font-size: 0.85rem;
+}
+.comment-text {
+  color: #223046;
+  font-size: 1rem;
+}
+.no-comments {
+  color: #888;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.comment-form {
+  display: flex;
+  gap: 0.5rem;
+}
+.comment-form input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #b4d4ee;
+  font-size: 1rem;
+}
+.comment-form button {
+  background: rgb(141, 188, 232);
+  color: #223046;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.comment-form button:hover {
+  background: rgb(185, 218, 248);
+}

@@ -97,25 +97,29 @@ export default function PublicPlaylists() {
             </ul>
             <section className="playlist-comments">
               <h3>Comentarios</h3>
-              <ul>
+              <div className="comments-list">
                 {comments.length > 0 ? (
                   comments.map((c, idx) => (
-                    <li key={idx}>
-                      <strong>{c.username}:</strong> {c.text} <span style={{ color: '#aaa', fontSize: '0.8em' }}>{new Date(c.date).toLocaleString()}</span>
-                    </li>
+                    <div key={idx} className="comment-item">
+                      <div className="comment-header">
+                        <span className="comment-user">{c.username}</span>
+                        <span className="comment-date">{new Date(c.date).toLocaleString()}</span>
+                      </div>
+                      <div className="comment-text">{c.text}</div>
+                    </div>
                   ))
                 ) : (
-                  <li>No hay comentarios.</li>
+                  <div className="no-comments">No hay comentarios.</div>
                 )}
-              </ul>
+              </div>
               {token && (
-                <form onSubmit={handleAddComment} style={{ marginTop: 10 }}>
+                <form onSubmit={handleAddComment} className="comment-form">
                   <input
                     type="text"
                     value={commentText}
                     onChange={e => setCommentText(e.target.value)}
                     placeholder="Escribe un comentario..."
-                    style={{ width: '70%', marginRight: 8 }}
+                    maxLength={200}
                   />
                   <button type="submit">Comentar</button>
                 </form>
